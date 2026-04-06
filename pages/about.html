@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About Us — Tricia Empire</title>
+<link rel="stylesheet" href="../css/main.css"/>
+<style>
+.about-hero{background:linear-gradient(135deg,#1a0010,#600030,#1a1a2e);padding:4rem 1.5rem;text-align:center}
+.about-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,5rem);color:#fff;font-weight:400;margin-bottom:.5rem}
+.about-hero p{color:#bbb;font-size:1rem;max-width:600px;margin:0 auto}
+.about-wrap{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
+.about-story{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem}
+.about-visual{height:400px;background:linear-gradient(135deg,#1a0010,#600030,#1a1a2e);display:flex;align-items:center;justify-content:center;font-size:12rem;position:relative}
+.about-visual::after{content:'';position:absolute;inset:12px;border:1px solid rgba(201,168,76,.3)}
+.about-text h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--dark);margin-bottom:1rem;line-height:1.15}
+.about-text p{font-size:.9rem;line-height:1.9;color:var(--muted);margin-bottom:1rem}
+.about-sig{font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;color:var(--red);margin-top:1.5rem}
+.values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-bottom:4rem}
+.value-card{border:1px solid var(--border);padding:2rem;text-align:center;transition:border-color .2s,transform .2s}
+.value-card:hover{border-color:var(--red);transform:translateY(-3px)}
+.value-icon{font-size:2.5rem;margin-bottom:1rem}
+.value-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--dark);margin-bottom:.5rem}
+.value-card p{font-size:.82rem;line-height:1.7;color:var(--muted)}
+.team-section{text-align:center;margin-bottom:4rem}
+.team-section h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--dark);margin-bottom:.5rem}
+.team-section p{font-size:.9rem;color:var(--muted);max-width:600px;margin:0 auto 2rem}
+.cta-strip{background:linear-gradient(135deg,#1a0010,#600030);padding:3rem 1.5rem;text-align:center}
+.cta-strip h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:#fff;margin-bottom:.8rem;font-weight:400}
+.cta-strip p{color:#bbb;margin-bottom:1.5rem}
+@media(max-width:768px){.about-story{grid-template-columns:1fr}.about-visual{height:250px;font-size:8rem}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="about-hero">
+  <h1>Our Story</h1>
+  <p>The passion, the purpose, the people behind Tricia Empire</p>
+</div>
+<div class="about-wrap">
+  <div class="breadcrumb" style="margin-bottom:2rem"><a href="../index.html">Home</a><span>›</span><span>About Us</span></div>
+  <div class="about-story">
+    <div class="about-visual">🌹</div>
+    <div class="about-text">
+      <h2>Confidence in Every Drop</h2>
+      <p>Tricia Empire was born from a single, unwavering belief: <strong>your scent tells your story before you say a word.</strong> It is your silent signature — the invisible crown that makes you unforgettable in every room you enter.</p>
+      <p>Founded in Lagos, Nigeria, we set out with a mission to make luxury fragrances accessible to every woman and man who refuses to be ordinary. We believe that smelling extraordinary shouldn't come with an extraordinary price tag.</p>
+      <p>We craft each fragrance as an act of self-expression. From the first spritz to the last lingering note, every Tricia Empire perfume is designed to awaken something powerful within you — the version of yourself that walks in with presence and leaves an impression that never fades.</p>
+      <p>This is not just perfume. <strong>This is identity. This is power. This is your empire.</strong></p>
+      <div class="about-sig">— Tricia</div>
+    </div>
+  </div>
+
+  <div class="section-header" style="margin-bottom:1.5rem"><h2>Our Values</h2></div>
+  <div class="values-grid">
+    <div class="value-card"><div class="value-icon">💯</div><h3>Authenticity</h3><p>Every bottle we sell is 100% genuine. We source directly from trusted suppliers and stand behind every product with complete confidence.</p></div>
+    <div class="value-card"><div class="value-icon">⏳</div><h3>Longevity</h3><p>Our fragrances are formulated to last 12–24 hours on the skin. We use premium fixatives so your scent never abandons you mid-day.</p></div>
+    <div class="value-card"><div class="value-icon">💛</div><h3>Affordability</h3><p>Luxury should not be a privilege for the few. We make premium fragrances accessible so you can smell extraordinary every single day.</p></div>
+    <div class="value-card"><div class="value-icon">🚀</div><h3>Excellence</h3><p>From packaging to delivery, we obsess over every detail of your experience because you deserve nothing less than perfection.</p></div>
+  </div>
+
+  <div class="section-header" style="margin-bottom:1.5rem"><h2>Why Nigeria Loves Us</h2></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:3rem">
+    <div style="text-align:center;padding:1.5rem;background:var(--off)"><div style="font-size:2.5rem;margin-bottom:.5rem">🏆</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--red)">500+</h3><p style="font-size:.82rem;color:var(--muted)">Five-star reviews</p></div>
+    <div style="text-align:center;padding:1.5rem;background:var(--off)"><div style="font-size:2.5rem;margin-bottom:.5rem">📦</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--red)">2,000+</h3><p style="font-size:.82rem;color:var(--muted)">Orders delivered</p></div>
+    <div style="text-align:center;padding:1.5rem;background:var(--off)"><div style="font-size:2.5rem;margin-bottom:.5rem">🌍</div><h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--red)">36</h3><p style="font-size:.82rem;color:var(--muted)">States covered</p></div>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <h2>Ready to Define Your Scent?</h2>
+  <p>Shop our full collection of luxury fragrances today.</p>
+  <a href="category.html?cat=all&gender=all" class="btn-red" style="font-size:.85rem">Shop Now</a>
+</div>
+
+<div id="site-footer"></div>
+<script src="../js/products.js"></script><script src="../js/cart.js"></script><script src="../js/layout.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>renderLayout());</script>
+</body></html>

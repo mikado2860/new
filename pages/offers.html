@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Offers & Deals — Tricia Empire</title>
+<link rel="stylesheet" href="../css/main.css"/>
+<style>
+.offers-hero{background:linear-gradient(135deg,#1a0010,#600030,#1a1a2e);padding:3rem 1.5rem;text-align:center}
+.offers-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,4rem);color:#fff;font-weight:400;margin-bottom:.5rem}
+.offers-hero p{color:#bbb;font-size:.95rem}
+.countdown{display:flex;justify-content:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
+.countdown-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:.8rem 1.4rem;text-align:center;min-width:70px}
+.countdown-item .num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold2);line-height:1}
+.countdown-item .lbl{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#aaa;margin-top:.2rem}
+.deals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:1300px;margin:2rem auto;padding:0 1.5rem}
+.deal-card{border:2px solid var(--red);position:relative;overflow:hidden;background:#fff;transition:transform .2s,box-shadow .2s;cursor:pointer}
+.deal-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(192,57,43,.2)}
+.deal-badge{position:absolute;top:0;right:0;background:var(--red);color:#fff;font-size:.72rem;font-weight:700;padding:.4rem .8rem;z-index:2}
+.deal-img{height:200px;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:6rem;transition:transform .3s}
+.deal-card:hover .deal-img{transform:scale(1.05)}
+.deal-info{padding:1rem}
+.deal-name{font-size:.95rem;font-weight:600;color:var(--dark);margin-bottom:.3rem}
+.deal-desc{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:.7rem}
+.deal-price-row{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem}
+.deal-now{font-size:1.2rem;font-weight:700;color:var(--red)}
+.deal-old{font-size:.85rem;color:var(--muted);text-decoration:line-through}
+.deal-save{background:#27ae60;color:#fff;font-size:.68rem;font-weight:700;padding:.15rem .55rem}
+.offer-banner-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;max-width:1300px;margin:0 auto 2rem;padding:0 1.5rem}
+.big-offer{position:relative;overflow:hidden;height:200px;cursor:pointer;border-radius:4px}
+.big-offer-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:6rem;transition:transform .4s}
+.big-offer:hover .big-offer-bg{transform:scale(1.06)}
+.big-offer-label{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:1rem}
+.big-offer-label h3{color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.4rem}
+.big-offer-label p{color:var(--gold2);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.big-offer-label a{display:inline-block;margin-top:.4rem;font-size:.72rem;font-weight:600;color:#fff;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:.1rem}
+.section-wrap{max-width:1300px;margin:0 auto;padding:0 1.5rem 2rem}
+@media(max-width:768px){.offer-banner-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="offers-hero">
+  <h1>🔥 Hot Deals & Offers</h1>
+  <p>Exclusive savings on luxury fragrances — limited time only</p>
+  <div class="countdown">
+    <div class="countdown-item"><div class="num" id="cdH">00</div><div class="lbl">Hours</div></div>
+    <div class="countdown-item"><div class="num" id="cdM">00</div><div class="lbl">Minutes</div></div>
+    <div class="countdown-item"><div class="num" id="cdS">00</div><div class="lbl">Seconds</div></div>
+  </div>
+</div>
+
+<div style="max-width:1300px;margin:0 auto;padding:1.5rem 1.5rem .5rem">
+  <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Offers & Deals</span></div>
+</div>
+
+<!-- OFFER BANNERS -->
+<div class="offer-banner-row">
+  <div class="big-offer" onclick="location.href='category.html?cat=gift&gender=all'">
+    <div class="big-offer-bg" style="background:linear-gradient(135deg,#7b1a3a,#c0392b)">🎁</div>
+    <div class="big-offer-label"><p>Up to 30% Off</p><h3>Gift Sets</h3><a href="category.html?cat=gift&gender=all">Shop Now →</a></div>
+  </div>
+  <div class="big-offer" onclick="location.href='category.html?cat=new&gender=all'">
+    <div class="big-offer-bg" style="background:linear-gradient(135deg,#1a3050,#2a5080)">✨</div>
+    <div class="big-offer-label"><p>Fresh Arrivals</p><h3>New In Store</h3><a href="category.html?cat=new&gender=all">Shop Now →</a></div>
+  </div>
+  <div class="big-offer" onclick="location.href='category.html?cat=niche&gender=all'">
+    <div class="big-offer-bg" style="background:linear-gradient(135deg,#3d1800,#7a3500)">👑</div>
+    <div class="big-offer-label"><p>Premium Selection</p><h3>Niche Perfumes</h3><a href="category.html?cat=niche&gender=all">Shop Now →</a></div>
+  </div>
+</div>
+
+<!-- DEALS GRID -->
+<div class="section-wrap">
+  <div class="section-header"><h2>🔥 Current Deals</h2><a href="category.html?cat=all&gender=all">View All Products →</a></div>
+</div>
+<div class="deals-grid" id="dealsGrid"></div>
+
+<div id="site-footer"></div>
+<script src="../js/products.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/layout.js"></script>
+<script>
+// Countdown to midnight
+function updateCountdown(){
+  const now=new Date(),midnight=new Date(now);midnight.setHours(24,0,0,0);
+  const diff=Math.floor((midnight-now)/1000);
+  const h=Math.floor(diff/3600),m=Math.floor((diff%3600)/60),s=diff%60;
+  document.getElementById('cdH').textContent=String(h).padStart(2,'0');
+  document.getElementById('cdM').textContent=String(m).padStart(2,'0');
+  document.getElementById('cdS').textContent=String(s).padStart(2,'0');
+}
+setInterval(updateCountdown,1000);updateCountdown();
+
+function renderDeals(){
+  const deals=products.filter(p=>p.oldPrice);
+  document.getElementById('dealsGrid').innerHTML=deals.map(p=>{
+    const save=Math.round((1-p.price/p.oldPrice)*100);
+    return `<div class="deal-card" onclick="openModal(${p.id})">
+      <span class="deal-badge">Save ${save}%</span>
+      <div class="deal-img">${p.emoji}</div>
+      <div class="deal-info">
+        <div class="deal-name">${p.name}</div>
+        <div class="deal-desc">${p.desc}</div>
+        <div class="deal-price-row">
+          <span class="deal-now">₦${p.price.toLocaleString()}</span>
+          <span class="deal-old">₦${p.oldPrice.toLocaleString()}</span>
+          <span class="deal-save">-${save}%</span>
+        </div>
+        <button class="btn-red" style="width:100%" onclick="event.stopPropagation();addToCartById(${p.id})">Add to Cart</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{ renderLayout(); renderDeals(); });
+</script>
+</body></html>

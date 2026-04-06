@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Shop — Tricia Empire</title>
+<link rel="stylesheet" href="../css/main.css"/>
+<style>
+.shop-layout{display:grid;grid-template-columns:240px 1fr;gap:1.5rem;max-width:1300px;margin:0 auto;padding:1.5rem}
+.shop-sidebar{position:sticky;top:80px;align-self:start}
+.filter-box{border:1px solid var(--border);margin-bottom:1rem;overflow:hidden}
+.filter-title{background:var(--dark);color:#fff;padding:.55rem 1rem;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.filter-title span{font-size:.8rem;transition:transform .2s}
+.filter-body{padding:.8rem 1rem}
+.filter-check{display:flex;align-items:center;gap:.6rem;padding:.3rem 0;font-size:.82rem;cursor:pointer;transition:color .2s}
+.filter-check:hover{color:var(--red)}
+.filter-check input{accent-color:var(--red);cursor:pointer;width:14px;height:14px}
+.price-range{display:flex;flex-direction:column;gap:.5rem;padding:.3rem 0}
+.price-range input[type=range]{width:100%;accent-color:var(--red)}
+.price-vals{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.shop-main{min-width:0}
+.shop-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.8rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+.shop-topbar h1{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--dark)}
+.sort-row{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.sort-select{padding:.4rem .8rem;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:.78rem;outline:none;cursor:pointer;background:#fff}
+.results-info{font-size:.78rem;color:var(--muted)}
+.view-btns{display:flex;gap:.3rem}
+.view-btn{width:30px;height:30px;border:1px solid var(--border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s}
+.view-btn.active,.view-btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.cat-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.cat-tab{padding:.4rem 1rem;border:1px solid var(--border);background:#fff;font-size:.75rem;font-weight:500;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.05em}
+.cat-tab:hover,.cat-tab.active{background:var(--red);color:#fff;border-color:var(--red)}
+.gender-tabs{display:flex;gap:0;margin-bottom:1rem;border:1px solid var(--border);overflow:hidden;display:inline-flex}
+.gender-tab{padding:.5rem 1.4rem;background:#fff;border:none;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.06em}
+.gender-tab:hover,.gender-tab.active{background:var(--dark);color:#fff}
+.grid-4{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.list-view{display:flex;flex-direction:column;gap:1rem}
+.list-card{display:flex;gap:1rem;border:1px solid var(--border);padding:.8rem;transition:box-shadow .2s;cursor:pointer;background:#fff}
+.list-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.list-img{width:110px;height:110px;flex-shrink:0;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+.list-info{flex:1;min-width:0}
+.list-name{font-size:.9rem;font-weight:600;color:var(--dark);margin-bottom:.3rem}
+.list-desc{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:.5rem}
+.list-notes{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.6rem}
+.note-pill{background:var(--off);border:1px solid var(--border);font-size:.65rem;padding:.15rem .5rem;color:var(--text)}
+.list-footer{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.list-price{font-size:.95rem;font-weight:700;color:var(--red)}
+.list-old{font-size:.78rem;color:var(--muted);text-decoration:line-through}
+.no-results{text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1}
+.no-results div{font-size:3rem;margin-bottom:.8rem}
+.breadcrumb{font-size:.75rem;color:#888;padding:.6rem 1.5rem;max-width:1300px;margin:0 auto}
+.breadcrumb a{color:var(--gold2)}.breadcrumb span{color:#ccc;margin:0 .4rem}
+@media(max-width:900px){.shop-layout{grid-template-columns:1fr}.shop-sidebar{display:none}}
+@media(max-width:480px){.products-grid{grid-template-columns:repeat(2,1fr)}.cat-tabs{gap:.3rem}.cat-tab{font-size:.68rem;padding:.35rem .7rem}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="page-hero">
+  <h1 id="pageTitle">Shop All Fragrances</h1>
+  <p id="pageSubtitle">Discover our full collection of luxury perfumes</p>
+  <div class="breadcrumb" style="text-align:center"><a href="../index.html">Home</a><span>›</span><span id="breadCrumb" style="color:#ddd">Shop</span></div>
+</div>
+<div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span id="breadCrumb2">Shop</span></div>
+
+<div class="shop-layout">
+  <!-- SIDEBAR FILTERS -->
+  <aside class="shop-sidebar">
+    <div class="filter-box">
+      <div class="filter-title">Gender<span>▾</span></div>
+      <div class="filter-body">
+        <label class="filter-check"><input type="radio" name="gender" value="all" checked onchange="applyFilters()"/> All</label>
+        <label class="filter-check"><input type="radio" name="gender" value="women" onchange="applyFilters()"/> For Women</label>
+        <label class="filter-check"><input type="radio" name="gender" value="men" onchange="applyFilters()"/> For Men</label>
+      </div>
+    </div>
+    <div class="filter-box">
+      <div class="filter-title">Category<span>▾</span></div>
+      <div class="filter-body">
+        <label class="filter-check"><input type="checkbox" value="new" onchange="applyFilters()"/> New Arrivals</label>
+        <label class="filter-check"><input type="checkbox" value="bestseller" onchange="applyFilters()"/> Bestsellers</label>
+        <label class="filter-check"><input type="checkbox" value="gift" onchange="applyFilters()"/> Gift Sets</label>
+        <label class="filter-check"><input type="checkbox" value="niche" onchange="applyFilters()"/> Niche Perfumes</label>
+      </div>
+    </div>
+    <div class="filter-box">
+      <div class="filter-title">Scent Notes<span>▾</span></div>
+      <div class="filter-body">
+        <label class="filter-check"><input type="checkbox" value="floral" onchange="applyFilters()"/> Floral</label>
+        <label class="filter-check"><input type="checkbox" value="woody" onchange="applyFilters()"/> Woody</label>
+        <label class="filter-check"><input type="checkbox" value="fresh" onchange="applyFilters()"/> Fresh</label>
+        <label class="filter-check"><input type="checkbox" value="oriental" onchange="applyFilters()"/> Oriental</label>
+        <label class="filter-check"><input type="checkbox" value="sweet" onchange="applyFilters()"/> Sweet</label>
+        <label class="filter-check"><input type="checkbox" value="oud" onchange="applyFilters()"/> Oud</label>
+        <label class="filter-check"><input type="checkbox" value="citrus" onchange="applyFilters()"/> Citrus</label>
+      </div>
+    </div>
+    <div class="filter-box">
+      <div class="filter-title">Price Range<span>▾</span></div>
+      <div class="filter-body">
+        <div class="price-range">
+          <input type="range" id="priceMax" min="5000" max="65000" value="65000" step="500" oninput="updatePriceLabel();applyFilters()"/>
+          <div class="price-vals"><span>₦5,000</span><span id="priceLabel">₦65,000</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="filter-box">
+      <div class="filter-title">Rating<span>▾</span></div>
+      <div class="filter-body">
+        <label class="filter-check"><input type="radio" name="rating" value="0" checked onchange="applyFilters()"/> All Ratings</label>
+        <label class="filter-check"><input type="radio" name="rating" value="5" onchange="applyFilters()"/> ★★★★★ Only</label>
+        <label class="filter-check"><input type="radio" name="rating" value="4" onchange="applyFilters()"/> ★★★★☆ & above</label>
+      </div>
+    </div>
+    <button class="btn-red" style="width:100%;margin-top:.5rem" onclick="clearFilters()">Clear All Filters</button>
+  </aside>
+
+  <!-- MAIN SHOP -->
+  <main class="shop-main">
+    <!-- GENDER TABS -->
+    <div class="gender-tabs">
+      <button class="gender-tab active" id="gTabAll" onclick="setGenderTab('all',this)">All</button>
+      <button class="gender-tab" id="gTabWomen" onclick="setGenderTab('women',this)">👩 Women</button>
+      <button class="gender-tab" id="gTabMen" onclick="setGenderTab('men',this)">👨 Men</button>
+    </div>
+
+    <!-- CATEGORY TABS -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" id="cTabAll" onclick="setCatTab('all',this)">All</button>
+      <button class="cat-tab" id="cTabNew" onclick="setCatTab('new',this)">New Arrivals</button>
+      <button class="cat-tab" id="cTabBest" onclick="setCatTab('bestseller',this)">Bestsellers</button>
+      <button class="cat-tab" id="cTabGift" onclick="setCatTab('gift',this)">Gift Sets</button>
+      <button class="cat-tab" id="cTabNiche" onclick="setCatTab('niche',this)">Niche</button>
+      <button class="cat-tab" id="cTabFloral" onclick="setNoteTab('floral',this)">Floral</button>
+      <button class="cat-tab" id="cTabWoody" onclick="setNoteTab('woody',this)">Woody</button>
+      <button class="cat-tab" id="cTabFresh" onclick="setNoteTab('fresh',this)">Fresh</button>
+      <button class="cat-tab" id="cTabOriental" onclick="setNoteTab('oriental',this)">Oriental</button>
+    </div>
+
+    <!-- TOPBAR -->
+    <div class="shop-topbar">
+      <div class="results-info" id="resultsInfo">Showing all products</div>
+      <div class="sort-row">
+        <select class="sort-select" onchange="applyFilters()">
+          <option value="default">Sort: Default</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name A–Z</option>
+          <option value="rating">Top Rated</option>
+        </select>
+        <div class="view-btns">
+          <button class="view-btn active" onclick="setView('grid',this)" title="Grid View">▦</button>
+          <button class="view-btn" onclick="setView('list',this)" title="List View">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS OUTPUT -->
+    <div id="shopOutput" class="products-grid grid-4"></div>
+  </main>
+</div>
+
+<div id="site-footer"></div>
+<script src="../js/products.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/layout.js"></script>
+<script>
+let currentView = 'grid';
+let activeGender = 'all';
+let activeCat = 'all';
+let activeNote = '';
+
+// Read URL params on load
+function readParams() {
+  const p = new URLSearchParams(window.location.search);
+  const cat = p.get('cat') || 'all';
+  const gender = p.get('gender') || 'all';
+  const note = p.get('note') || '';
+  const search = p.get('search') || '';
+
+  activeGender = gender;
+  activeCat = cat;
+  activeNote = note;
+
+  // Set gender radio
+  document.querySelectorAll('input[name=gender]').forEach(r => { if(r.value===gender) r.checked=true; });
+
+  // Highlight gender tab
+  document.querySelectorAll('.gender-tab').forEach(b => b.classList.remove('active'));
+  const gMap = {all:'gTabAll',women:'gTabWomen',men:'gTabMen'};
+  if(gMap[gender]) document.getElementById(gMap[gender]).classList.add('active');
+
+  // Highlight cat tab
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  const cMap = {all:'cTabAll',new:'cTabNew',bestseller:'cTabBest',gift:'cTabGift',niche:'cTabNiche'};
+  const noteMap = {floral:'cTabFloral',woody:'cTabWoody',fresh:'cTabFresh',oriental:'cTabOriental'};
+  if(cat!=='all' && cMap[cat]) document.getElementById(cMap[cat]).classList.add('active');
+  else if(note && noteMap[note]) document.getElementById(noteMap[note]).classList.add('active');
+  else document.getElementById('cTabAll').classList.add('active');
+
+  // Set page title
+  const titles = {
+    'all-all':'Shop All Fragrances','all-women':'For Women','all-men':'For Men',
+    'new-all':'New Arrivals','bestseller-all':'Bestsellers','gift-all':'Gift Sets',
+    'niche-all':'Niche Perfumes','new-women':'New Arrivals — Women','new-men':'New Arrivals — Men',
+    'bestseller-women':'Bestsellers — Women','bestseller-men':'Bestsellers — Men',
+  };
+  const key = (note || cat)+'-'+(gender==='all'?'all':gender);
+  const title = note ? `${note.charAt(0).toUpperCase()+note.slice(1)} Fragrances` : (titles[`${cat}-${gender}`] || 'Shop');
+  document.getElementById('pageTitle').textContent = title;
+  document.getElementById('pageSubtitle').textContent = note ? `Showing all ${note} fragrances` : '';
+  document.getElementById('breadCrumb').textContent = title;
+  document.getElementById('breadCrumb2').textContent = title;
+
+  if(search) {
+    document.getElementById('pageTitle').textContent = `Search: "${search}"`;
+    document.getElementById('breadCrumb').textContent = `Search: "${search}"`;
+    document.getElementById('breadCrumb2').textContent = `Search: "${search}"`;
+  }
+
+  applyFilters(search);
+}
+
+function applyFilters(searchOverride) {
+  const gender = document.querySelector('input[name=gender]:checked')?.value || 'all';
+  const checkedCats = [...document.querySelectorAll('.filter-body input[type=checkbox]:checked')].map(c=>c.value);
+  const rating = parseInt(document.querySelector('input[name=rating]:checked')?.value || '0');
+  const priceMax = parseInt(document.getElementById('priceMax').value);
+  const sortVal = document.querySelector('.sort-select')?.value || 'default';
+  const search = searchOverride || new URLSearchParams(window.location.search).get('search') || '';
+  const note = activeNote;
+  const cat = activeCat;
+
+  let list = products;
+
+  // Gender filter
+  if(gender !== 'all') list = list.filter(p=>p.gender===gender);
+
+  // Cat tabs (from URL/tab state)
+  if(cat !== 'all' && !['floral','woody','fresh','oriental','sweet','oud','citrus'].includes(cat)) {
+    list = list.filter(p=>p.category===cat);
+  }
+
+  // Note filter (URL param or tab)
+  if(note) list = list.filter(p=>p.notes.some(n=>n.toLowerCase().includes(note)));
+
+  // Sidebar checkboxes (categories)
+  if(checkedCats.length) {
+    const catFilters = checkedCats.filter(v=>['new','bestseller','gift','niche'].includes(v));
+    const noteFilters = checkedCats.filter(v=>!['new','bestseller','gift','niche'].includes(v));
+    if(catFilters.length) list = list.filter(p=>catFilters.includes(p.category));
+    if(noteFilters.length) list = list.filter(p=>noteFilters.every(n=>p.notes.some(pn=>pn.toLowerCase().includes(n))));
+  }
+
+  // Price
+  list = list.filter(p=>p.price<=priceMax);
+
+  // Rating
+  if(rating>0) list = list.filter(p=>p.stars>=rating);
+
+  // Search
+  if(search) {
+    const q = search.toLowerCase();
+    list = list.filter(p=>p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.notes.some(n=>n.toLowerCase().includes(q)));
+  }
+
+  // Sort
+  if(sortVal==='price-asc') list=[...list].sort((a,b)=>a.price-b.price);
+  else if(sortVal==='price-desc') list=[...list].sort((a,b)=>b.price-a.price);
+  else if(sortVal==='name') list=[...list].sort((a,b)=>a.name.localeCompare(b.name));
+  else if(sortVal==='rating') list=[...list].sort((a,b)=>b.stars-a.stars);
+
+  document.getElementById('resultsInfo').textContent = `Showing ${list.length} product${list.length!==1?'s':''}`;
+  renderOutput(list);
+}
+
+function renderOutput(list) {
+  const out = document.getElementById('shopOutput');
+  if(!list.length){out.innerHTML='<div class="no-results"><div>🔍</div><p>No products found. Try different filters.</p><button class="btn-red" style="margin-top:1rem" onclick="clearFilters()">Clear Filters</button></div>';return;}
+
+  if(currentView==='grid'){
+    out.className='products-grid grid-4';
+    out.innerHTML=list.map(p=>renderProductCard(p,'../')).join('');
+  } else {
+    out.className='list-view';
+    out.innerHTML=list.map(p=>`
+      <div class="list-card" onclick="openModal(${p.id})">
+        <div class="list-img">${p.emoji}</div>
+        <div class="list-info">
+          <div class="list-name">${p.name}</div>
+          <div style="color:var(--gold2);font-size:.75rem;margin-bottom:.3rem">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+          <div class="list-desc">${p.desc}</div>
+          <div class="list-notes">${p.notes.map(n=>`<span class="note-pill">${n}</span>`).join('')}</div>
+          <div class="list-footer">
+            <span class="list-price">₦${p.price.toLocaleString()}</span>
+            ${p.oldPrice?`<span class="list-old">₦${p.oldPrice.toLocaleString()}</span>`:''}
+            <button class="btn-red" style="padding:.4rem 1.2rem;font-size:.72rem" onclick="event.stopPropagation();addToCartById(${p.id})">Add to Cart</button>
+            <button class="btn-outline" style="padding:.35rem 1rem;font-size:.72rem" onclick="event.stopPropagation();openModal(${p.id})">Quick View</button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+}
+
+function setView(v, btn) {
+  currentView = v;
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function setGenderTab(g, btn) {
+  activeGender = g;
+  document.querySelectorAll('.gender-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('input[name=gender]').forEach(r=>{if(r.value===g)r.checked=true;});
+  applyFilters();
+}
+
+function setCatTab(cat, btn) {
+  activeCat = cat;
+  activeNote = '';
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  // Uncheck category checkboxes
+  document.querySelectorAll('.filter-body input[type=checkbox]').forEach(c=>{
+    if(['new','bestseller','gift','niche'].includes(c.value)) c.checked=false;
+  });
+  if(cat!=='all') {
+    const cb = document.querySelector(`.filter-body input[value="${cat}"]`);
+    if(cb) cb.checked = true;
+  }
+  applyFilters();
+}
+
+function setNoteTab(note, btn) {
+  activeNote = note;
+  activeCat = 'all';
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function updatePriceLabel() {
+  const v = document.getElementById('priceMax').value;
+  document.getElementById('priceLabel').textContent = '₦'+parseInt(v).toLocaleString();
+}
+
+function clearFilters() {
+  activeGender='all'; activeCat='all'; activeNote='';
+  document.querySelectorAll('input[name=gender]').forEach(r=>{if(r.value==='all')r.checked=true;});
+  document.querySelectorAll('.filter-body input[type=checkbox]').forEach(c=>c.checked=false);
+  document.querySelectorAll('input[name=rating]').forEach(r=>{if(r.value==='0')r.checked=true;});
+  document.getElementById('priceMax').value=65000; updatePriceLabel();
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('cTabAll').classList.add('active');
+  document.querySelectorAll('.gender-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('gTabAll').classList.add('active');
+  applyFilters();
+}
+
+document.addEventListener('DOMContentLoaded',()=>{ renderLayout(); readParams(); });
+</script>
+</body></html>

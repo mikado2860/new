@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tricia Empire | Luxury Fragrance Store</title>
+<link rel="stylesheet" href="css/main.css"/>
+
+<style>
+.hero{position:relative;overflow:hidden;background:var(--dark)}
+.slides{display:flex;transition:transform .5s ease}
+.slide{min-width:100%;position:relative;display:flex;align-items:center;overflow:hidden;min-height:400px}
+.slide-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+.slide-content{position:relative;z-index:2;padding:4rem 3rem;max-width:600px}
+.slide-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:400;color:#fff;line-height:1.1;margin-bottom:.8rem}
+.slide-content h1 em{font-style:italic;color:var(--gold2)}
+.slide-content p{color:#ddd;font-size:.95rem;margin-bottom:1.5rem;line-height:1.7}
+.slider-nav{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:10}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:background .2s}
+.dot.active{background:var(--red)}
+.slider-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:40px;height:40px;font-size:1.3rem;z-index:10;transition:background .2s;cursor:pointer}
+.slider-arrow:hover{background:var(--red)}
+.slider-arrow.prev{left:.8rem}.slider-arrow.next{right:.8rem}
+.promo-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1rem 1.5rem;max-width:1300px;margin:0 auto}
+.promo-card{position:relative;overflow:hidden;border-radius:4px;cursor:pointer;height:160px}
+.promo-card-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:6rem;transition:transform .4s}
+.promo-card:hover .promo-card-bg{transform:scale(1.05)}
+.promo-label{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.6),transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:1rem 1.2rem}
+.promo-label h3{color:#fff;font-size:1.1rem;font-weight:600;font-family:'Cormorant Garamond',serif}
+.promo-label span{color:var(--gold2);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase}
+.store-body{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1300px;margin:0 auto;padding:1.2rem 1.5rem}
+.sidebar{padding-right:1.2rem}
+.sidebar-box{border:1px solid var(--border);margin-bottom:1.2rem;overflow:hidden}
+.sidebar-title{background:var(--red);color:#fff;padding:.6rem 1rem;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.sidebar-body{padding:.8rem 1rem}
+.sidebar-link{display:flex;align-items:center;padding:.4rem 0;font-size:.82rem;color:var(--text);border-bottom:1px solid var(--light);transition:color .2s;cursor:pointer}
+.sidebar-link:last-child{border-bottom:none}.sidebar-link:hover{color:var(--red)}
+.sidebar-link .arr{margin-left:auto;color:var(--muted)}
+.mini-product{display:flex;gap:.6rem;padding:.6rem 0;border-bottom:1px solid var(--light);align-items:center;cursor:pointer}
+.mini-product:last-child{border-bottom:none}
+.mini-img{width:55px;height:55px;flex-shrink:0;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.mini-info{flex:1;min-width:0}
+.mini-name{font-size:.74rem;line-height:1.3;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.15rem}
+.mini-stars{color:var(--gold2);font-size:.63rem}.mini-price{font-size:.77rem;font-weight:600;color:var(--red)}
+.main-content{min-width:0}
+.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:1.2rem;overflow-x:auto}
+.tab-btn{background:none;border:none;padding:.6rem 1.2rem;font-size:.78rem;font-weight:600;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .2s,border-color .2s}
+.tab-btn:hover{color:var(--red)}.tab-btn.active{color:var(--red);border-bottom-color:var(--red)}
+.gender-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.gender-card{position:relative;overflow:hidden;height:200px;cursor:pointer}
+.gender-bg{position:absolute;inset:0;transition:transform .5s}
+.gender-card:hover .gender-bg{transform:scale(1.06)}
+.gender-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem}
+.gender-card.women .gender-overlay{background:linear-gradient(to top,rgba(180,30,50,.8),transparent)}
+.gender-card.men .gender-overlay{background:linear-gradient(to top,rgba(20,30,60,.8),transparent)}
+.g-eyebrow{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:.3rem}
+.g-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;color:#fff;line-height:1}
+.g-link{display:inline-block;margin-top:.5rem;font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.5);transition:border-color .2s}
+.g-link:hover{border-color:#fff}
+.bs-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.bs-item{display:flex;gap:1rem;border:1px solid var(--border);padding:.8rem;transition:box-shadow .3s;cursor:pointer;align-items:center}
+.bs-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.bs-img{width:90px;height:90px;flex-shrink:0;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:3rem}
+.bs-info{flex:1;min-width:0}
+.bs-name{font-size:.88rem;font-weight:500;color:var(--dark);margin-bottom:.3rem;line-height:1.35}
+.bs-desc{font-size:.75rem;color:var(--muted);line-height:1.6;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis}
+.bs-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.bs-price{font-size:.95rem;font-weight:700;color:var(--red)}
+.bs-cart{background:var(--red);color:#fff;border:none;padding:.4rem 1rem;font-size:.72rem;font-weight:600;text-transform:uppercase;transition:background .2s;cursor:pointer}
+.bs-cart:hover{background:var(--red2)}
+.offers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.offer-banner{position:relative;overflow:hidden;height:160px;cursor:pointer;border-radius:3px}
+.offer-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;transition:transform .4s}
+.offer-banner:hover .offer-inner{transform:scale(1.06)}
+.offer-label{position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.55),transparent);display:flex;align-items:flex-end;padding:.8rem}
+.offer-label span{color:#fff;font-size:.88rem;font-weight:600;font-family:'Cormorant Garamond',serif}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.testi-card{border:1px solid var(--border);padding:1.2rem;position:relative;background:var(--off)}
+.testi-q{font-size:3rem;color:var(--red);opacity:.12;line-height:.8;position:absolute;top:.5rem;left:.7rem;font-family:serif}
+.testi-text{font-size:.83rem;line-height:1.7;color:var(--text);margin-bottom:.8rem;font-style:italic;position:relative;z-index:1}
+.testi-author{display:flex;align-items:center;gap:.6rem}
+.testi-av{width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.testi-name{font-size:.8rem;font-weight:600;color:var(--dark)}.testi-stars{color:var(--gold2);font-size:.7rem}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.blog-card{border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:box-shadow .3s}
+.blog-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.blog-img{height:150px;overflow:hidden;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+.blog-body{padding:.8rem}.blog-cat{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem}
+.blog-title{font-size:.82rem;font-weight:500;line-height:1.4;margin-bottom:.5rem;color:var(--dark)}
+.read-more{font-size:.72rem;color:var(--red);font-weight:600;border-bottom:1px solid transparent;transition:border-color .2s;display:inline-block}
+.blog-card:hover .read-more{border-color:var(--red)}
+.about-strip{background:#f8f8f8;padding:2.5rem 1.5rem}
+.about-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.about-visual{display:flex;align-items:center;justify-content:center;height:280px;background:linear-gradient(135deg,#1a0010,#600030,#1a1a2e);font-size:9rem}
+@media(max-width:1024px){.store-body{grid-template-columns:1fr}.sidebar{display:none}.promo-row{grid-template-columns:1fr}}
+@media(max-width:600px){.gender-row{grid-template-columns:1fr}.about-inner{grid-template-columns:1fr}.slide-content{padding:2rem 1.2rem}}
+</style>
+</head>
+<body>
+<div id="site-header"></div>
+<div class="hero">
+  <div class="slides" id="slides">
+    <div class="slide"><div class="slide-bg" style="background:linear-gradient(135deg,#1a0010,#3d0020,#600030,#1a1a2e)"></div><div class="slide-content"><h1>Discover the<br/><em>best deals</em><br/>on top fragrances</h1><p>Luxury scents. Authentic bottles. Delivered nationwide.</p><a href="pages/category.html?cat=all&gender=all" class="btn-red">Shop Now</a></div></div>
+    <div class="slide"><div class="slide-bg" style="background:linear-gradient(135deg,#0a1628,#1a3050,#0d2040)"></div><div class="slide-content"><h1>New Arrivals<br/><em>For Women</em><br/>& Men</h1><p>Fresh drops every week. Be the first to own the season's finest fragrances.</p><a href="pages/category.html?cat=new&gender=all" class="btn-red">See New Arrivals</a></div></div>
+    <div class="slide"><div class="slide-bg" style="background:linear-gradient(135deg,#1a0800,#3d1800,#5a2800)"></div><div class="slide-content"><h1>Best Deals on<br/><em>Bestsellers</em></h1><p>Top-rated fragrances loved by thousands of Nigerians.</p><a href="pages/category.html?cat=bestseller&gender=all" class="btn-red">View Bestsellers</a></div></div>
+  </div>
+  <button class="slider-arrow prev" onclick="moveSlide(-1)">‹</button>
+  <button class="slider-arrow next" onclick="moveSlide(1)">›</button>
+  <div class="slider-nav" id="sliderNav"></div>
+</div>
+<div class="promo-row">
+  <div class="promo-card" onclick="location.href='pages/category.html?cat=all&gender=women'"><div class="promo-card-bg" style="background:linear-gradient(135deg,#8b1a3a,#c0392b)">🌸</div><div class="promo-label"><span>Exclusive Picks</span><h3>For Women — Floral & Sweet</h3></div></div>
+  <div class="promo-card" onclick="location.href='pages/category.html?cat=all&gender=men'"><div class="promo-card-bg" style="background:linear-gradient(135deg,#0a1628,#1a3050)">🌊</div><div class="promo-label"><span>Latest Offers</span><h3>For Men — Bold & Classic</h3></div></div>
+</div>
+<div class="store-body">
+  <aside class="sidebar">
+    <div class="sidebar-box"><div class="sidebar-title">Shop by Category</div><div class="sidebar-body">
+      <div class="sidebar-link" onclick="location.href='pages/category.html?cat=all&gender=women'">For Women <span class="arr">›</span></div>
+      <div class="sidebar-link" onclick="location.href='pages/category.html?cat=all&gender=men'">For Men <span class="arr">›</span></div>
+      <div class="sidebar-link" onclick="location.href='pages/category.html?cat=new&gender=all'">New Arrivals <span class="arr">›</span></div>
+      <div class="sidebar-link" onclick="location.href='pages/category.html?cat=bestseller&gender=all'">Bestsellers <span class="arr">›</span></div>
+      <div class="sidebar-link" onclick="location.href='pages/category.html?cat=gift&gender=all'">Gift Sets <span class="arr">›</span></div>
+      <div class="sidebar-link" onclick="location.href='pages/category.html?cat=niche&gender=all'">Niche Perfumes <span class="arr">›</span></div>
+      <div class="sidebar-link" onclick="location.href='pages/category.html?cat=all&gender=all'">All Fragrances <span class="arr">›</span></div>
+    </div></div>
+    <div class="sidebar-box"><div class="sidebar-title">Popular Products</div><div class="sidebar-body" id="popularSidebar"></div></div>
+    <div style="background:linear-gradient(135deg,#1a0010,#600030);padding:1.5rem;text-align:center;margin-bottom:1.2rem">
+      <p style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.4rem">Special Offer</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#fff;margin-bottom:.8rem">Up to 30% Off<br/>Gift Sets</p>
+      <a href="pages/category.html?cat=gift&gender=all" class="btn-red" style="font-size:.72rem;padding:.5rem 1.2rem">Shop Now</a>
+    </div>
+  </aside>
+  <main class="main-content">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="filterTab('all',this)">All Perfumes</button>
+      <button class="tab-btn" onclick="filterTab('women',this)">For Women</button>
+      <button class="tab-btn" onclick="filterTab('men',this)">For Men</button>
+      <button class="tab-btn" onclick="filterTab('new',this)">New Arrivals</button>
+      <button class="tab-btn" onclick="filterTab('bestseller',this)">Bestsellers</button>
+      <button class="tab-btn" onclick="filterTab('gift',this)">Gift Sets</button>
+    </div>
+    <div class="section-header"><h2>New Arrivals</h2><div style="display:flex;align-items:center;gap:.8rem"><div style="display:flex;gap:.3rem"><button class="car-btn" onclick="scrollG(-1)">‹</button><button class="car-btn" onclick="scrollG(1)">›</button></div><a href="pages/category.html?cat=new&gender=all">View All →</a></div></div>
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="gender-row">
+      <div class="gender-card women" onclick="location.href='pages/category.html?cat=all&gender=women'">
+        <div class="gender-bg" style="background:linear-gradient(135deg,#8b1a3a,#c0392b,#e8b4c0)"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:8rem;opacity:.3;pointer-events:none">🌸</div>
+        <div class="gender-overlay"><div><p class="g-eyebrow">Exclusive · Feminine · Luxurious</p><h3 class="g-title">For Women</h3><a href="pages/category.html?cat=all&gender=women" class="g-link">Shop Women's →</a></div></div>
+      </div>
+      <div class="gender-card men" onclick="location.href='pages/category.html?cat=all&gender=men'">
+        <div class="gender-bg" style="background:linear-gradient(135deg,#0a1628,#1a3050,#2a4a80)"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:8rem;opacity:.25;pointer-events:none">🌊</div>
+        <div class="gender-overlay"><div><p class="g-eyebrow">Bold · Confident · Classic</p><h3 class="g-title">For Men</h3><a href="pages/category.html?cat=all&gender=men" class="g-link">Shop Men's →</a></div></div>
+      </div>
+    </div>
+    <div class="section-header"><h2>Bestsellers</h2><a href="pages/category.html?cat=bestseller&gender=all">View All →</a></div>
+    <div class="bs-list" id="bestsellerList"></div>
+    <div class="section-header"><h2>Gift Sets & Special Offers</h2><a href="pages/offers.html">View All →</a></div>
+    <div class="offers-grid">
+      <div class="offer-banner" onclick="location.href='pages/category.html?cat=gift&gender=all'"><div class="offer-inner" style="background:linear-gradient(135deg,#7b1a3a,#c0392b)">🎁</div><div class="offer-label"><span>Gift Sets</span></div></div>
+      <div class="offer-banner" onclick="location.href='pages/category.html?cat=niche&gender=all'"><div class="offer-inner" style="background:linear-gradient(135deg,#1a1a2e,#2a2a50)">💎</div><div class="offer-label"><span>Niche Perfumes</span></div></div>
+      <div class="offer-banner" onclick="location.href='pages/category.html?note=oriental&gender=all'"><div class="offer-inner" style="background:linear-gradient(135deg,#3d1800,#7a3500)">🏺</div><div class="offer-label"><span>Oriental Collection</span></div></div>
+      <div class="offer-banner" onclick="location.href='pages/category.html?note=fresh&gender=all'"><div class="offer-inner" style="background:linear-gradient(135deg,#0a3d2e,#1a7a5a)">🌿</div><div class="offer-label"><span>Fresh & Green</span></div></div>
+    </div>
+    <div class="section-header"><h2>What Our Customers Say</h2></div>
+    <div class="testi-grid">
+      <div class="testi-card"><div class="testi-q">"</div><p class="testi-text">"I wore Midnight Desire to a dinner and three people asked what I was wearing. My husband couldn't stop complimenting me."</p><div class="testi-author"><div class="testi-av">A</div><div><p class="testi-name">Adaeze O. — Lagos</p><p class="testi-stars">★★★★★</p></div></div></div>
+      <div class="testi-card"><div class="testi-q">"</div><p class="testi-text">"Golden Aura is literally bottled confidence. I spray it before every important meeting and I walk in like I own the room."</p><div class="testi-author"><div class="testi-av">F</div><div><p class="testi-name">Fatimah B. — Abuja</p><p class="testi-stars">★★★★★</p></div></div></div>
+      <div class="testi-card"><div class="testi-q">"</div><p class="testi-text">"Fast delivery, beautiful packaging, and the fragrance lasted from 8am to midnight. Tricia Empire is a lifestyle."</p><div class="testi-author"><div class="testi-av">C</div><div><p class="testi-name">Chisom E. — Port Harcourt</p><p class="testi-stars">★★★★★</p></div></div></div>
+    </div>
+    <div class="section-header"><h2>Latest Blog</h2><a href="#">Read More →</a></div>
+    <div class="blog-grid">
+      <div class="blog-card" onclick="showToast('Blog coming soon!')"><div class="blog-img" style="background:linear-gradient(135deg,#8b1a3a,#e8a0b0)">🌸</div><div class="blog-body"><p class="blog-cat">Fragrance Tips</p><p class="blog-title">Best Gourmand Perfumes for Women (2025 Edition)</p><span class="read-more">Read More →</span></div></div>
+      <div class="blog-card" onclick="showToast('Blog coming soon!')"><div class="blog-img" style="background:linear-gradient(135deg,#1a3050,#4a7ab0)">🎯</div><div class="blog-body"><p class="blog-cat">Style Guide</p><p class="blog-title">5 Captivating Workplace Fragrances for Professionals</p><span class="read-more">Read More →</span></div></div>
+      <div class="blog-card" onclick="showToast('Blog coming soon!')"><div class="blog-img" style="background:linear-gradient(135deg,#3d1800,#c07030)">✨</div><div class="blog-body"><p class="blog-cat">Scent Education</p><p class="blog-title">Elevate Your Scent: The Power of Layering Fragrances</p><span class="read-more">Read More →</span></div></div>
+    </div>
+  </main>
+</div>
+<div class="about-strip"><div class="about-inner"><div class="about-visual">🌹</div><div>
+  <p style="font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:.8rem">Our Story</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--dark);margin-bottom:1rem">Confidence in Every Drop</h2>
+  <p style="font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:.8rem">Tricia Empire was born from a single belief: your scent tells your story before you say a word.</p>
+  <p style="font-size:.9rem;line-height:1.8;color:var(--muted);margin-bottom:1.2rem"><strong>This is identity. This is power. This is your empire.</strong></p>
+  <a href="pages/about.html" class="btn-red">Read Our Story</a>
+</div></div></div>
+<div id="site-footer"></div>
+<script src="js/products.js"></script><script src="js/cart.js"></script><script src="js/layout.js"></script>
+<script>
+let slideIndex=0;
+function buildDots(){const n=document.getElementById('sliderNav'),c=document.querySelectorAll('.slide').length;n.innerHTML=Array.from({length:c},(_,i)=>`<div class="dot ${i===0?'active':''}" onclick="goSlide(${i})"></div>`).join('')}
+function goSlide(i){slideIndex=i;document.getElementById('slides').style.transform=`translateX(-${i*100}%)`;document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i))}
+function moveSlide(d){const c=document.querySelectorAll('.slide').length;slideIndex=(slideIndex+d+c)%c;goSlide(slideIndex)}
+setInterval(()=>moveSlide(1),5000);
+function filterTab(f,btn){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let list=products;if(f==='women')list=products.filter(p=>p.gender==='women');else if(f==='men')list=products.filter(p=>p.gender==='men');else if(['new','bestseller','gift','niche'].includes(f))list=products.filter(p=>p.category===f);renderGrid(list)}
+function renderGrid(list){document.getElementById('productsGrid').innerHTML=list.map(p=>renderProductCard(p,'./')).join('')}
+function scrollG(d){const g=document.getElementById('productsGrid');if(g)g.scrollBy({left:d*400,behavior:'smooth'})}
+document.addEventListener('DOMContentLoaded',()=>{
+  renderLayout();buildDots();renderGrid(products);
+  document.getElementById('bestsellerList').innerHTML=products.filter(p=>p.category==='bestseller').map(p=>`<div class="bs-item" onclick="openModal(${p.id})"><div class="bs-img">${p.emoji}</div><div class="bs-info"><div class="bs-name">${p.name}</div><div class="bs-desc">${p.desc}</div><div class="bs-footer"><span class="bs-price">₦${p.price.toLocaleString()}</span><button class="bs-cart" onclick="event.stopPropagation();addToCartById(${p.id})">Add to Cart</button></div></div></div>`).join('');
+  document.getElementById('popularSidebar').innerHTML=products.filter(p=>p.stars===5).slice(0,4).map(p=>`<div class="mini-product" onclick="openModal(${p.id})"><div class="mini-img">${p.emoji}</div><div class="mini-info"><div class="mini-name">${p.name}</div><div class="mini-stars">${'★'.repeat(p.stars)}</div><div class="mini-price">₦${p.price.toLocaleString()}</div></div></div>`).join('');
+});
+</script>
+</body></html>
